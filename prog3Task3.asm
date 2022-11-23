@@ -49,38 +49,36 @@ main:
 	#store y in $s1
 	move $s1, $v0
 
+	li $t0, 1 #$t0 is for counter
+	la $t1, ($s0)
+	
 	printString(output)
 	
+	
 	beq $s1, $zero, printResult0
-	beq $s1, 1, printResult1
+	beq $s1, 1, printAnswer
 	bgt $s1, $zero, loop
 	
 	exit
 	
 
 loop:
-	move $t0, $zero
-	mul $s2, $s0, $s0 
+	mul $s0, $s0, $t1 
 	addi $t0, $t0, 1
 	
 	beq $t0, $s1, printAnswer #if counter equal 'y' then print the answer
 	blt $t0, $s1, loop	#if counter is less that 'y' loop again 
 	
-	#beq $t0, 0, printAnswer	#if loop counter is 0, then exit
-	#bgt $t0, 0, loop	#if loop counter is greater than 0, then continue
 
 	
 printAnswer:
-	printInt($s2)
+	printInt($s0)
 	exit
 	
 printResult0:
 	printInt(1)
 	exit
 	
-printResult1:
-	printInt($s0)
-	exit
 exit:
 	exit
 	
