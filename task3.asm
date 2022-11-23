@@ -33,16 +33,20 @@
 		
 		la $t1, ($s0)
 		
-		j loop
+		bge $s1, 1, loop
+		
+		li $s0, 1
+		
+		j exit
 		
 	loop:
+		
+		
 		addi $t0, $t0, 1
 		
 		mul $s0, $s0, $t1
 		
 		ble $t0, $s1, loop
-		
-		j exit
 	
 	exit:
 		li $v0, 4
